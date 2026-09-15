@@ -1,0 +1,4 @@
+spring:
+  application:
+    name: king-main-and-his-kingdom
+
