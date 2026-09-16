@@ -19,6 +19,7 @@ public class ApiError {
     private String title;
     private int status;
     private String description;
+    private String image;
     @JsonProperty("validation-errors")
     private List<ValidationError> validationErrors = new ArrayList<ValidationError>();
 
@@ -29,6 +30,7 @@ public class ApiError {
         this.title = title;
         this.status = status;
         this.description = description;
+        this.image = "https://http.cat/" + status + ".jpg";
         this.timestamp = LocalDateTime.now();
     }
 }

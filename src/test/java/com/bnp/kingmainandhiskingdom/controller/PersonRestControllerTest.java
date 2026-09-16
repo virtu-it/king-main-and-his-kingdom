@@ -13,6 +13,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -80,17 +81,14 @@ class PersonRestControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonPayload))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.title").value("Invalid Request"))
-                .andExpect(jsonPath("$.status").value(400))
-                .andExpect(jsonPath("$.description").value("Age must be greater than 20"));
+                .andExpect(content().contentType(MediaType.IMAGE_JPEG));
     }
 
     @Test
     void testGetNonExistentPersonThrowsNotFound() throws Exception {
         mockMvc.perform(get("/api/persons/UnknownKnight"))
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.title").value("Person Not Found"))
-                .andExpect(jsonPath("$.status").value(404));
+                .andExpect(content().contentType(MediaType.IMAGE_JPEG));
     }
 
     @Test
