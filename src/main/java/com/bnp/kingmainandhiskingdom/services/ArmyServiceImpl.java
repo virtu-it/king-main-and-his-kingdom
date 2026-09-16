@@ -16,11 +16,9 @@ public class ArmyServiceImpl implements ArmyService {
     @Value("${person.default-age}")
     private int defaultPersonAge;
 
-    private final ArmyService tankService;
     private final PersonRepository personRepository;
 
-    public ArmyServiceImpl( @Tank ArmyService tankService, PersonRepository personRepository) {
-        this.tankService = tankService;
+    public ArmyServiceImpl( PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
 
