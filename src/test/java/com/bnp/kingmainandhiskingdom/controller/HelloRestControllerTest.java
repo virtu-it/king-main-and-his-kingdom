@@ -28,21 +28,21 @@ class HelloRestControllerTest {
 
     @Test
     void testWelcomeDefault() throws Exception {
-        mockMvc.perform(get("/welcome"))
+        mockMvc.perform(get("/api/welcome"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Welcome to the Kingdom, Guest!"));
     }
 
     @Test
     void testWelcomeWithCustomName() throws Exception {
-        mockMvc.perform(get("/welcome").param("name", "Arthur"))
+        mockMvc.perform(get("/api/welcome").param("name", "Arthur"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Welcome to the Kingdom, Arthur!"));
     }
 
     @Test
     void testWelcomePerson() throws Exception {
-        mockMvc.perform(get("/welcomePerson").param("name", "Lancelot").param("age", "28"))
+        mockMvc.perform(get("/api/welcome-person").param("name", "Lancelot").param("age", "28"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Lancelot"))
                 .andExpect(jsonPath("$.age").value(28));

@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ArmyServiceImplTest {
 
     @Autowired
+    @Army
     private ArmyService armyService;
 
     @Test

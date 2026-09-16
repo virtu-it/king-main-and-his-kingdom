@@ -26,7 +26,6 @@ public class PersonRestController {
 
     private final ArmyService armyService;
 
-    @Autowired
     public PersonRestController(@Army ArmyService armyService) {
         this.armyService = armyService;
     }

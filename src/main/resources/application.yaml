@@ -1,7 +1,6 @@
 spring:
   application:
     name: king-main-and-his-kingdom
-
 person:
   default-name: Maximus
   default-age: 18
