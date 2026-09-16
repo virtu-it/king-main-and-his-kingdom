@@ -1,9 +1,11 @@
 package com.bnp.kingmainandhiskingdom.controller;
 
 import com.bnp.kingmainandhiskingdom.domain.Person;
+import com.bnp.kingmainandhiskingdom.exception.ApiError;
 import com.bnp.kingmainandhiskingdom.exception.PersonNotFoundException;
 import com.bnp.kingmainandhiskingdom.services.Army;
 import com.bnp.kingmainandhiskingdom.services.ArmyService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -38,9 +40,6 @@ public class PersonRestController {
     @GetMapping("/{name}")
     public ResponseEntity<Person> getPersonByName(@PathVariable String name) {
         Person person = armyService.findPersonByName(name);
-        if (person == null) {
-            throw new PersonNotFoundException("Person with name '" + name + "' could not be found");
-        }
         return ResponseEntity.ok(person);
     }
 
@@ -54,7 +53,7 @@ public class PersonRestController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Person> createPerson(@RequestBody Person person) {
+    public ResponseEntity<Person> createPerson(@Valid @RequestBody Person person) {
         if (person == null) {
             throw new IllegalArgumentException("Person cannot be null");
         }

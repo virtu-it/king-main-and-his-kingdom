@@ -1,6 +1,7 @@
 package com.bnp.kingmainandhiskingdom.services;
 
 import com.bnp.kingmainandhiskingdom.domain.Person;
+import com.bnp.kingmainandhiskingdom.exception.PersonNotFoundException;
 import com.bnp.kingmainandhiskingdom.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class ArmyServiceImpl implements ArmyService {
 
     private final PersonRepository personRepository;
 
-    public ArmyServiceImpl( PersonRepository personRepository) {
+    public ArmyServiceImpl(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
 
@@ -42,9 +43,12 @@ public class ArmyServiceImpl implements ArmyService {
     @Override
     public Person findPersonByName(String name) {
         if (name == null) {
-            return new Person(this.defaultPersonName,this.defaultPersonAge);
+            return new Person(this.defaultPersonName, this.defaultPersonAge);
         }
-        return personRepository.findByName(name).orElse(null);
+        return personRepository.findByName(name)
+                .orElseThrow(() ->
+                        new PersonNotFoundException("Person with name '" + name + "' could not be found")
+                );
     }
 
     @Override

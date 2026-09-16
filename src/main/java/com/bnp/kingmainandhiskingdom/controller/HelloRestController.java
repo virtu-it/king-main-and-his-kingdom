@@ -3,6 +3,7 @@ package com.bnp.kingmainandhiskingdom.controller;
 import com.bnp.kingmainandhiskingdom.domain.Person;
 import com.bnp.kingmainandhiskingdom.services.Army;
 import com.bnp.kingmainandhiskingdom.services.ArmyService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,8 +17,8 @@ public class HelloRestController {
         this.armyService = armyService;
     }
 
-    @RequestMapping(path = "/welcome/{name}", method = RequestMethod.GET)
-    public String hello(@PathVariable String name) {
+    @RequestMapping(path = "/welcome", method = RequestMethod.GET)
+    public String hello(@PathParam("name") String name) {
         if(name == null){
             return "Welcome to the Kingdom, Guest!";
         }
